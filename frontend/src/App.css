@@ -1,0 +1,75 @@
+/* Style tombol dengan efek hover */
+.button-style {
+  background-color: #1890ff;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  margin-left: 2px;
+  margin-right: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.button-style:hover {
+  background-color: #40a9ff;
+}
+
+/* Container form untuk mempercantik form */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Input, select, dan textarea style */
+.input-style,
+.select-style,
+.textarea-style {
+  width: 92%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1.5px solid #d9d9d9;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.input-style:focus,
+.select-style:focus,
+.textarea-style:focus {
+  border-color: #40a9ff;
+  outline: none;
+}
+
+.textarea-style {
+  min-height: 80px;
+  resize: vertical;
+  max-width: 93.5%;
+}
+
+/* Task card style yang lebih kecil dan rapi */
+.task-card {
+  padding: 8px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  color: white;
+  cursor: grab;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  user-select: none;
+}
+
+.timestamps-section p {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.timestamps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 kolom */
+  gap: 6px 20px; /* jarak antar baris dan kolom */
+  color: white;
+  max-height: 30px;
+}
