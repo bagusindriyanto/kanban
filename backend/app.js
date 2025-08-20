@@ -8,7 +8,7 @@ const picsRoutes = require('./routes/pics');
 const tasksRoutes = require('./routes/tasks');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +18,10 @@ app.use(express.static(path.join(__dirname, '../frontend/dist')));
 app.use('/api/activities', activitiesRoutes);
 app.use('/api/pics', picsRoutes);
 app.use('/api/tasks', tasksRoutes);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 app.get('/', (req, res) => {
   res.send('Kanban Backend API is running');

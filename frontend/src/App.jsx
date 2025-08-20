@@ -341,7 +341,7 @@ export default function App() {
 
   const fetchActivities = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/activities');
+      const res = await fetch('/api/activities');
       const data = await res.json();
       setActivities(data);
     } catch (err) {
@@ -351,7 +351,7 @@ export default function App() {
 
   const fetchPics = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/pics');
+      const res = await fetch('/api/pics');
       const data = await res.json();
       setPics(data);
     } catch (err) {
@@ -361,7 +361,7 @@ export default function App() {
 
   const fetchTasks = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/tasks');
+      const res = await fetch('/api/tasks');
       const data = await res.json();
       setTasks(data);
     } catch (err) {
@@ -371,7 +371,7 @@ export default function App() {
 
   const addActivity = async (name) => {
     try {
-      const res = await fetch('http://localhost:3001/api/activities', {
+      const res = await fetch('/api/activities', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name }),
@@ -386,7 +386,7 @@ export default function App() {
 
   const addPic = async (name) => {
     try {
-      const res = await fetch('http://localhost:3001/api/pics', {
+      const res = await fetch('/api/pics', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name }),
@@ -402,7 +402,7 @@ export default function App() {
   const addTask = async (content, pic_id, detail) => {
     try {
       const now = new Date().toISOString();
-      const res = await fetch('http://localhost:3001/api/tasks', {
+      const res = await fetch('/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -448,23 +448,20 @@ export default function App() {
         }
       } else if (newStatus === 'archived') timestamp_archived = now;
 
-      const res = await fetch(
-        `http://localhost:3001/api/tasks/${taskId}/status`,
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            status: newStatus,
-            timestamp_todo,
-            timestamp_progress,
-            timestamp_done,
-            timestamp_archived,
-            minute_pause: task.minute_pause || 0,
-            minute_activity,
-            pause_time: task.pause_time || null,
-          }),
-        }
-      );
+      const res = await fetch(`/api/tasks/${taskId}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: newStatus,
+          timestamp_todo,
+          timestamp_progress,
+          timestamp_done,
+          timestamp_archived,
+          minute_pause: task.minute_pause || 0,
+          minute_activity,
+          pause_time: task.pause_time || null,
+        }),
+      });
       if (!res.ok) throw new Error('Failed to update task status');
 
       setTasks((prev) =>
@@ -516,17 +513,14 @@ export default function App() {
         updatedPauseTime = newPauseTime;
       }
 
-      const res = await fetch(
-        `http://localhost:3001/api/tasks/${taskId}/pause`,
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            minute_pause: updatedMinutePause,
-            pause_time: updatedPauseTime,
-          }),
-        }
-      );
+      const res = await fetch(`/api/tasks/${taskId}/pause`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          minute_pause: updatedMinutePause,
+          pause_time: updatedPauseTime,
+        }),
+      });
       if (!res.ok) throw new Error('Failed to update pause data');
 
       setTasks((prev) =>
