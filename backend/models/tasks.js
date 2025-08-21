@@ -48,17 +48,17 @@ const updateTaskStatus = (body, taskId) => {
     minute_activity,
     pause_time,
   } = body;
-  console.log('Updating task status:', {
-    taskId,
-    status,
-    timestamp_todo,
-    timestamp_progress,
-    timestamp_done,
-    timestamp_archived,
-    minute_pause,
-    minute_activity,
-    pause_time,
-  });
+  // console.log('Updating task status:', {
+  //   taskId,
+  //   status,
+  //   timestamp_todo,
+  //   timestamp_progress,
+  //   timestamp_done,
+  //   timestamp_archived,
+  //   minute_pause,
+  //   minute_activity,
+  //   pause_time,
+  // });
   const SQL =
     'UPDATE tasks SET status = ?, timestamp_todo = ?, timestamp_progress = ?, timestamp_done = ?, timestamp_archived = ?, minute_pause = ?, minute_activity = ?, pause_time = ? WHERE id = ?';
   const values = [

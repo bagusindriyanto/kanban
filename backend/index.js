@@ -20,6 +20,10 @@ app.use('/api/activities', activitiesRoutes);
 app.use('/api/pics', picsRoutes);
 app.use('/api/tasks', tasksRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Kanban Backend API is running');
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

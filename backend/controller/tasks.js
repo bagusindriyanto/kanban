@@ -36,9 +36,8 @@ const addNewTask = async (req, res) => {
 };
 
 const updateTaskStatus = async (req, res) => {
-  const { taskId } = req.params;
+  const taskId = req.params.id;
   const { body } = req;
-  console.log(taskId);
 
   try {
     const [data] = await tasksModel.updateTaskStatus(body, taskId);
@@ -51,10 +50,40 @@ const updateTaskStatus = async (req, res) => {
       error: err.message,
     });
   }
+
+  // console.log('taskId:', taskId);
+  // console.log('body:', body);
+  // res.json({
+  //   message: 'Update task status',
+  // });
 };
+
+// const updateTaskPause = async (req, res) => {
+//   const taskId = req.params.id;
+//   const { body } = req;
+
+//   try {
+//     const [data] = await tasksModel.updateTaskPause(body, taskId);
+//     if (data.affectedRows === 0) {
+//       return res.status(404).json({ error: 'Task not found' });
+//     }
+//     res.json({ message: 'Task updated' });
+//   } catch (err) {
+//     res.status(500).json({
+//       error: err.message,
+//     });
+//   }
+
+// console.log('taskId:', taskId);
+// console.log('body:', body);
+// res.json({
+//   message: 'Update task status',
+// });
+// };
 
 module.exports = {
   getAllTasks,
   addNewTask,
   updateTaskStatus,
+  // updateTaskPause,
 };
