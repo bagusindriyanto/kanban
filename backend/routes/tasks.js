@@ -8,4 +8,7 @@ router.get('/', tasksController.getAllTasks);
 // Add new task
 router.post('/', tasksController.addNewTask);
 
+// Update task status
+router.put('/:id/status', tasksController.updateTaskStatus);
+
 module.exports = router;

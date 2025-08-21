@@ -35,7 +35,26 @@ const addNewTask = async (req, res) => {
   }
 };
 
+const updateTaskStatus = async (req, res) => {
+  const { taskId } = req.params;
+  const { body } = req;
+  console.log(taskId);
+
+  try {
+    const [data] = await tasksModel.updateTaskStatus(body, taskId);
+    if (data.affectedRows === 0) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+    res.json({ message: 'Task updated' });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   getAllTasks,
   addNewTask,
+  updateTaskStatus,
 };
