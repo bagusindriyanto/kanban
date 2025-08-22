@@ -1,5 +1,6 @@
 const picsModel = require('../models/pics');
 
+// Controller to get all pics
 const getAllPics = async (req, res) => {
   try {
     const [data] = await picsModel.getAllPics();
@@ -11,6 +12,7 @@ const getAllPics = async (req, res) => {
   }
 };
 
+// Controller to add a new pic
 const addNewPic = async (req, res) => {
   const { body } = req;
   if (!body.name) {

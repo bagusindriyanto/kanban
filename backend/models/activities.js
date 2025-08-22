@@ -1,10 +1,12 @@
 const db = require('../config/db');
 
+// Query to get all activities
 const getAllActivities = () => {
   const SQL = 'SELECT * FROM activities ORDER BY created_at DESC';
   return db.execute(SQL);
 };
 
+// Query to add a new activity
 const addNewActivity = (body) => {
   const SQL = 'INSERT INTO `activities` (`name`) VALUES (?)';
   const values = [body.name];

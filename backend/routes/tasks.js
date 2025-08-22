@@ -10,9 +10,8 @@ router.post('/', tasksController.addNewTask);
 
 // Update task status
 router.put('/:id/status', tasksController.updateTaskStatus);
-// router.patch('/:id/status', tasksController.updateTaskStatus);
 
 // Update pause minute and pause time for a task
-// router.put('/:id/pause', tasksController.updateTaskPause);
+router.put('/:id/pause', tasksController.updateTaskPause);
 
 module.exports = router;

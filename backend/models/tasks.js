@@ -1,10 +1,18 @@
 const db = require('../config/db');
 
+// Query to get all tasks
 const getAllTasks = () => {
   const SQL = 'SELECT * FROM tasks ORDER BY created_at DESC';
   return db.execute(SQL);
 };
 
+// Query to get a task by ID
+const getTaskById = (taskId) => {
+  const SQL = 'SELECT * FROM tasks WHERE id = ?';
+  return db.execute(SQL, [taskId]);
+};
+
+// Query to add a new task
 const addNewTask = (body) => {
   const {
     content,
@@ -37,6 +45,7 @@ const addNewTask = (body) => {
   return db.execute(SQL, values);
 };
 
+// Query to update task status
 const updateTaskStatus = (body, taskId) => {
   const {
     status,
@@ -48,17 +57,6 @@ const updateTaskStatus = (body, taskId) => {
     minute_activity,
     pause_time,
   } = body;
-  // console.log('Updating task status:', {
-  //   taskId,
-  //   status,
-  //   timestamp_todo,
-  //   timestamp_progress,
-  //   timestamp_done,
-  //   timestamp_archived,
-  //   minute_pause,
-  //   minute_activity,
-  //   pause_time,
-  // });
   const SQL =
     'UPDATE tasks SET status = ?, timestamp_todo = ?, timestamp_progress = ?, timestamp_done = ?, timestamp_archived = ?, minute_pause = ?, minute_activity = ?, pause_time = ? WHERE id = ?';
   const values = [
@@ -72,12 +70,32 @@ const updateTaskStatus = (body, taskId) => {
     pause_time || null,
     taskId,
   ];
+  return db.execute(SQL, values);
+};
 
+// Query to update pause minute and pause time for a task
+const updateTaskPause = ({ minute_pause, pause_time }, taskId) => {
+  const updates = [];
+  const values = [];
+
+  if (minute_pause !== undefined) {
+    updates.push('minute_pause = ?');
+    values.push(minute_pause);
+  }
+  if (pause_time !== undefined) {
+    updates.push('pause_time = ?');
+    values.push(pause_time);
+  }
+
+  values.push(taskId);
+  const SQL = `UPDATE tasks SET ${updates.join(', ')} WHERE id = ?`;
   return db.execute(SQL, values);
 };
 
 module.exports = {
   getAllTasks,
+  getTaskById,
   addNewTask,
   updateTaskStatus,
+  updateTaskPause,
 };

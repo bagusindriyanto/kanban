@@ -1,5 +1,6 @@
 const activitiesModel = require('../models/activities');
 
+// Controller to get all activities
 const getAllActivities = async (req, res) => {
   try {
     const [data] = await activitiesModel.getAllActivities();
@@ -11,6 +12,7 @@ const getAllActivities = async (req, res) => {
   }
 };
 
+// Controller to add a new activity
 const addNewActivity = async (req, res) => {
   const { body } = req;
   if (!body.name) {
